@@ -37,7 +37,7 @@ public class TeamRepository {
 	}
 
 	public Team load(Integer id) {
-		String sql = "SELECT team_name,headquarters,inauguration,history FROM teams WHERE id=:id";
+		String sql = "SELECT * FROM teams WHERE id=:id";
 
 		SqlParameterSource param = new MapSqlParameterSource().addValue("id", id);
 

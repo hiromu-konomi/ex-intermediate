@@ -34,7 +34,6 @@ public class TeamController {
 		team.setInauguration(service.showDetail(id).getInauguration());
 		team.setHistory(service.showDetail(id).getHistory());
 		model.addAttribute("team", team);
-		System.out.println("おはよう");
 		return "team-detail";
 	}
 }
