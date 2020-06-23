@@ -8,6 +8,9 @@ public class Team {
 	private String inauguration;
 	private String history;
 
+	public Team() {
+	}
+
 	public Integer getId() {
 		return id;
 	}
@@ -54,6 +57,12 @@ public class Team {
 
 	public void setHistory(String history) {
 		this.history = history;
+	}
+
+	@Override
+	public String toString() {
+		return "Team [id=" + id + ", leagueName=" + leagueName + ", teamName=" + teamName + ", headquarters="
+				+ headquarters + ", inauguration=" + inauguration + ", history=" + history + "]";
 	}
 
 }
