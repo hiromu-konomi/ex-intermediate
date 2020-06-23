@@ -23,7 +23,18 @@ public class TeamController {
 		List<Team> teamList = new ArrayList<>();
 		teamList.addAll(service.showList());
 		model.addAttribute("teamList", teamList);
-		System.out.println("おはよう");
 		return "team-list";
+	}
+	
+	@RequestMapping("/detail")
+	public String detail(Integer id, Model model) {
+		Team team = new Team();
+		team.setTeamName(service.showDetail(id).getTeamName());
+		team.setHeadquarters(service.showDetail(id).getHeadquarters());
+		team.setInauguration(service.showDetail(id).getInauguration());
+		team.setHistory(service.showDetail(id).getHistory());
+		model.addAttribute("team", team);
+		System.out.println("おはよう");
+		return "team-detail";
 	}
 }
