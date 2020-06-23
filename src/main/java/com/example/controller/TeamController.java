@@ -1,5 +1,6 @@
 package com.example.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +20,10 @@ public class TeamController {
 
 	@RequestMapping("/list")
 	public String list(Model model) {
-		List<Team> teamList = service.showList();
+		List<Team> teamList = new ArrayList<>();
+		teamList.addAll(service.showList());
 		model.addAttribute("teamList", teamList);
-
+		System.out.println("おはよう");
 		return "team-list";
 	}
 }

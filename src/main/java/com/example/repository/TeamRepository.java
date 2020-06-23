@@ -20,8 +20,8 @@ public class TeamRepository {
 	private static final RowMapper<Team> TEAM_ROW_MAPPER = (rs, i) -> {
 		Team team = new Team();
 		team.setId(rs.getInt("id"));
-		team.setLeagueName(rs.getString("leagueName"));
-		team.setTeamName(rs.getString("teamName"));
+		team.setLeagueName(rs.getString("league_name"));
+		team.setTeamName(rs.getString("team_name"));
 		team.setHeadquarters(rs.getString("headquarters"));
 		team.setInauguration(rs.getString("inauguration"));
 		team.setHistory(rs.getString("history"));
@@ -29,7 +29,7 @@ public class TeamRepository {
 	};
 
 	public List<Team> findAll() {
-		String sql = "SELECT team_name FROM teams ORDER BY inauguration";
+		String sql = "SELECT * FROM teams ORDER BY inauguration";
 
 		List<Team> teamList = template.query(sql, TEAM_ROW_MAPPER);
 
