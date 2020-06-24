@@ -1,5 +1,7 @@
 package com.example.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,7 +16,7 @@ public class ClothesService {
 	@Autowired
 	private ClothesRepository repository;
 	
-	public Clothes receive(Integer gender, String color) {
+	public List<Clothes> receive(Integer gender, String color) {
 		return repository.findBy(gender, color);
 	}
 }

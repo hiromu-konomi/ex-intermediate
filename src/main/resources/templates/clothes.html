@@ -2,28 +2,43 @@
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>衣類検索</title>
 </head>
 <body>
 	<h5>衣類検索</h5>
-	<form th:action="@{/clothes/result}" method="post">
+	<form th:action="@{/clothes/result}" method="post" th:object="${clothesForm}" target="#resultClothes">
 		<table>
 			<tr>
 				<td>
-					<input type="radio" name="gender" value="male" checked>Man<br>
-					<input type="radio" name="gender" value="female">Woman
+					<input type="radio" value="0" th:field="*{gender}">Man<br>
+					<input type="radio" value="1" th:field="*{gender}">Woman
 				</td>
 				<td>
-					<select name="color">
-						<option value="red" selected>赤</option>
-						<option value="blue">青</option>
-						<option value="white">白</option>
-						<option value="yellow">黄</option>
+					<select name="color" th:field="*{color}">
+						<option th:value="赤">赤</option>
+						<option th:value="青">青</option>
+						<option th:value="白">白</option>
+						<option th:value="黄">黄</option>
 					</select>
 				</td>
 			</tr>
 		</table><br>
 		<button>検索</button>
 	</form>
+	<br>
+	<table th:each="clothes:${clothesList}" border="1">
+		<tr>
+			<th>ジャンル</th>
+			<td th:text="${clothes.genre}"></td>
+		</tr>
+		<tr>
+			<th>サイズ</th>
+			<td th:text="${clothes.size}"></td>
+		</tr>
+		<tr>
+			<th>価格</th>
+			<td th:text="${clothes.price}"></td>
+		</tr>
+	</table>
 </body>
 </html>

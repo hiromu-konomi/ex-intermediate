@@ -1,5 +1,7 @@
 package com.example.repository;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -27,13 +29,13 @@ public class ClothesRepository {
 		return clothes;
 	};
 	
-	public Clothes findBy(Integer gender, String color) {
+	public List<Clothes> findBy(Integer gender, String color) {
 		String sql = "SELECT * FROM clothes WHERE gender=:gender AND color=:color";
 		
 		SqlParameterSource param = new MapSqlParameterSource().addValue("gender", gender).addValue("color", color);
 		
-		Clothes clothes = template.queryForObject(sql, param, CLOTHES_ROW_MAPPER);
+		List<Clothes> clothesList = template.query(sql, param, CLOTHES_ROW_MAPPER);
 		
-		return clothes;
+		return clothesList;
 	}
 }
