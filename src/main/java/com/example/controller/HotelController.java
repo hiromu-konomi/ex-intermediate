@@ -1,5 +1,9 @@
 package com.example.controller;
 
+import java.util.ArrayList;
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Controller;
@@ -8,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.domain.Hotel;
+import com.example.form.HotelForm;
 import com.example.service.HotelService;
 
 @Controller
@@ -18,8 +23,8 @@ public class HotelController {
 	private HotelService service;
 	
 	@ModelAttribute
-	public Hotel setHotel() {
-		return new Hotel();
+	public HotelForm setHotel() {
+		return new HotelForm();
 	}
 	
 	@RequestMapping("")
@@ -28,10 +33,15 @@ public class HotelController {
 	}
 	
 	@RequestMapping("/result")
-	public String result(Hotel hotel, Model model) {
-		service.receive(hotel.getPrice());
+	public String result(HotelForm form, Model model) {
+		List<Hotel> hotelList = new ArrayList<>();
 		
-		model.addAttribute("hotel", hotel);
+		if(form.getPrice()==null) {
+			hotelList = service.receiveAll();
+		} else {
+			hotelList = service.receive(form.getPrice());
+		}
+		model.addAttribute("hotelList", hotelList);
 		
 		return "hotel";
 	}

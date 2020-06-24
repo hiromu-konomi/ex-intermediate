@@ -1,5 +1,7 @@
 package com.example.repository;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -27,13 +29,21 @@ public class HotelRepository {
 		return hotel;
 	};
 	
-	public Hotel findBy(Integer price) {
-		String sql = "SELECT * FROM hotels WHERE price=:price";
+	public List<Hotel> findBy(Integer price) {
+		String sql = "SELECT * FROM hotels WHERE price<=:price";
 		
 		SqlParameterSource param = new MapSqlParameterSource("price", price);
 		
-		Hotel hotel = template.queryForObject(sql, param, HOTEL_ROW_MAPPER);
+		List<Hotel> hotelList = template.query(sql, param, HOTEL_ROW_MAPPER);
 		
-		return hotel;
+		return hotelList;
+	}
+	
+	public List<Hotel> findAll(){
+		String sql = "SELECT * FROM hotels ORDER BY id";
+		
+		List<Hotel> hotelList = template.query(sql, HOTEL_ROW_MAPPER);
+		
+		return hotelList;
 	}
 }
